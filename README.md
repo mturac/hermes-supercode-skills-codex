@@ -54,6 +54,25 @@ git clone https://github.com/mturac/hermes-supercode-skills-codex.git
 cp hermes-supercode-skills-codex/AGENTS.md ./AGENTS.md
 ```
 
+### Demo
+
+Place `AGENTS.md` in your project root:
+
+```bash
+curl -sO https://raw.githubusercontent.com/mturac/hermes-supercode-skills-codex/main/AGENTS.md
+```
+
+Codex now has 13 specialized skill modules. Example session:
+
+```
+User: This Postgres query is taking 8 seconds
+Codex: [db-whisperer activated] Running EXPLAIN ANALYZE...
+       → Missing index on orders.user_id + created_at
+       → Proposed fix: CREATE INDEX CONCURRENTLY idx_orders_user_created
+         ON orders(user_id, created_at DESC);
+       → Estimated improvement: 8s → 12ms (99.8% reduction)
+```
+
 ### How it works
 
 Codex reads `AGENTS.md` at the start of every session. The 13 skill definitions are loaded as context — when your task matches a skill's domain, Codex activates that skill's **Recon → Plan → Execute → Verify** workflow automatically.
